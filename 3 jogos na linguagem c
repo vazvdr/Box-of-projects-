@@ -1,0 +1,310 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+void game1() {
+    printf("Executando o Jogo 1...\n");
+
+  int l, c, player, ganhou, jogadas, opcao;
+    char jogo[3][3];
+
+    do{ 
+        player = 1;
+        ganhou = 0;
+        jogadas = 0;
+        
+      for(l = 0; l < 3; l++){
+        for(c = 0; c < 3; c++){
+          jogo[l][c] = ' ';
+      }
+      }
+    do{ 
+      printf("\n\n\t 0   1   2\n\n");
+      for(l = 0; l < 3; l++){
+        for(c = 0; c < 3; c++){
+          if(c == 0)
+     printf("\t");
+     printf(" %c ", jogo[l][c]);
+      if(c < 2)
+      printf("|");
+      if(c == 2)
+     printf("  %d", l);
+     }
+       if(l < 2) 
+    printf("\n\t-----------");
+    printf("\n");
+            }
+       do{
+    printf("\nPlayer 1 = 0\nPlayer 2 = X\n");
+    printf("\nPlayer %d: Digite a linha e a coluna que deseja jogar: ", player);
+    scanf("%d%d", &l, &c);
+       }while(l < 0 || l > 2 || c < 0 || c > 2 || jogo[l][c] != ' ');
+
+      if(player == 1){
+      jogo[l][c] = '0';
+      player++;
+      }
+      else{
+      jogo[l][c] = 'X';
+      player = 1;
+      }
+      jogadas++;
+          
+          if (jogo[0][0] == '0' && jogo[0][1] == '0' && jogo[0][2] == '0' ||
+              jogo[1][0] == '0' && jogo[1][1] == '0' && jogo[1][2] == '0' ||
+              jogo[2][0] == '0' && jogo[2][1] == '0' && jogo[2][2] == '0'){
+              
+    printf("\nParabens! O player 1 venceu por linha!\n");
+    ganhou = 1;
+    }
+
+           if (jogo[0][0] == 'X' && jogo[0][1] == 'X' && jogo[0][2] == 'X' ||
+               jogo[1][0] == 'X' && jogo[1][1] == 'X' && jogo[1][2] == 'X' ||
+               jogo[2][0] == 'X' && jogo[2][1] == 'X' && jogo[2][2] == 'X'){
+    printf("\nParabens! O player 2 venceu por linha!\n");
+    ganhou = 1;
+    }
+
+            if(jogo[0][0] == '0' && jogo[1][0] == '0' && jogo[2][0] == '0' ||
+               jogo[0][1] == '0' && jogo[1][1] == '0' && jogo[2][1] == '0' ||
+               jogo[0][2] == '0' && jogo[1][2] == '0' && jogo[2][2] == '0'){
+    printf("\nParabens! O player 1 venceu por coluna!\n");
+    ganhou = 1;
+    }
+
+            if(jogo[0][0] == 'X' && jogo[1][0] == 'X' && jogo[2][0] == 'X' ||
+               jogo[0][1] == 'X' && jogo[1][1] == 'X' && jogo[2][1] == 'X' ||
+               jogo[0][2] == 'X' && jogo[1][2] == 'X' && jogo[2][2] == 'X'){
+    printf("\nParabens! O player 2 venceu por coluna!\n");
+    ganhou = 1;
+    }
+ 
+            if(jogo[0][0] == '0' && jogo[1][1] == '0' && jogo[2][2] == '0'){
+    printf("\nParabens! O player 1 venceu na diag. principal!\n");
+    ganhou = 1;
+    }
+
+            if(jogo[0][0] == 'X' && jogo[1][1] == 'X' && jogo[2][2] == 'X'){
+    printf("\nParabens! O player 2 venceu na diag. principal!\n");
+    ganhou = 1;
+    }
+
+            if(jogo[0][2] == '0' && jogo[1][1] == '0' && jogo[2][0] == '0'){
+    printf("\nParabens! O player 1 venceu na diag. secundaria!\n");
+    ganhou = 1;
+    }
+
+            if(jogo[0][2] == 'X' && jogo[1][1] == 'X' && jogo[2][0] == 'X'){
+    printf("\nParabens! O player 2 venceu na diag. secundaria!\n");
+    ganhou = 1;
+    }
+        }while(ganhou == 0 && jogadas < 9);
+
+    printf("\n\n\t 0   1   2\n\n");
+      for(l = 0; l < 3; l++){
+       for(c = 0; c < 3; c++){
+         if(c == 0)
+    printf("\t");
+    printf(" %c ", jogo[l][c]);
+         if(c < 2)
+    printf("|");
+         if(c == 2)
+    printf("  %d", l);
+    }
+         if(l < 2)
+    printf("\n\t-----------");
+    printf("\n");
+        }
+        if(ganhou == 0)
+    printf("\nO jogo empatou!\n");
+    printf("\nDigite 1 para jogar novamente: \n");
+    scanf("%d", &opcao);
+    } while (opcao == 1);
+
+    
+}
+
+void game2() {
+    printf("Executando o Jogo 2...\n");
+
+    srand(time(NULL));
+  
+    int jogo[4][4];
+    int linha, coluna, acertos, c0, c1, c2, c3, pos1, pos2, pos3, pos4, num = 1;
+    acertos = 0;
+    int player, pont1, pont2;
+    
+    player = 1;
+    pont1 = 0;
+    pont2 = 0;
+    
+    for (linha = 0; linha < 4; linha++){
+    for (coluna = 0; coluna < 4; coluna++){
+    jogo[linha][coluna] = 0;
+    }
+    }
+    while (num <= 8)
+    {
+    pos1 = rand()%4;
+    pos2 = rand()%4;
+    pos3 = rand()%4;
+    pos4 = rand()%4;
+        
+    if (jogo[pos1][pos2] == 0 && jogo[pos3][pos4] == 0){
+    if (pos1 != pos3 && pos2 != pos4){
+       jogo[pos1][pos2] = num;
+       jogo[pos3][pos4] = num;
+       num++;
+        }
+       }
+      }
+
+    int matriz[4][4];
+  
+    for (linha = 0; linha < 4; linha++){
+    for (coluna = 0; coluna < 4; coluna++)
+    {
+      matriz[linha][coluna] = 0;
+      printf("%d ", matriz[linha][coluna]);
+    }
+    printf("\n");
+    }
+    
+    while (acertos < 8){
+        printf("\nVez do player %d\n", player);
+        printf("Entre com uma cordenada(max = 3 3): ");
+        scanf("%d %d", &c0, &c1);
+        printf("O número da posicao eh %d\n", jogo[c0][c1]);
+        printf("\nEntre com outra coordenada: ");
+        scanf("%d %d", &c2, &c3);
+        printf("O número da posicao eh %d\n", jogo[c2][c3]);
+       
+        if (jogo[c0][c1] == jogo[c2][c3] && matriz[c0][c1] == 0 && matriz[c2][c3] == 0){
+        acertos++;
+        matriz[c0][c1] = jogo[c0][c1];
+        matriz[c2][c3] = jogo[c2][c3];
+        if (player == 1){
+        pont1++;    
+        } else if (player == 2){
+        pont2++;
+        } 
+        for (linha = 0; linha < 4; linha++){
+        for (coluna = 0; coluna < 4; coluna++){
+        printf("%d ", matriz[linha][coluna]);
+        }
+        printf("\n");
+        }
+        } else {
+        printf("Errou, tente de novo\n");
+        player++; 
+        }
+                 
+        if (player > 2){
+        player = player - 2;
+        }
+    printf("\nPlayer 1: %d pts\nPlayer 2: %d pts\n", pont1, pont2);
+    }
+    
+    if (pont1 > pont2)
+    {
+    printf("Player 1 Venceu");
+    }
+    else if (pont2 > pont1)
+    {
+    printf("Player 2 Venceu");
+    }
+    else
+    {
+    printf("O jogo empatou");
+    }
+  }
+
+void game3() {
+    printf("Executando o Jogo 3...\n\n");
+
+  int nivel, tamanho, numeroTentativas=0, opcao;
+	
+  printf("Escolha o nivel que deseja jogar: \n\n1 - Nivel facil - 10 tentativas para achar um numero de 0 a 10.\n2 - Nivel medio - 8 tentativas para achar um numero de 0 a 100\n3 - Nivel dificil - 5 tentativas para achar um numero de 0 a 1000\n");
+  scanf("%d", &nivel);
+  
+	printf("\nO numero foi gerado\n");
+	printf("   Adivinhe-o!\n\n");
+	    
+		if (nivel == 1){
+    		tamanho = 10;
+    		numeroTentativas = 10;
+		} else if (nivel == 2){
+			tamanho=100;
+			numeroTentativas = 8;
+		} else {
+			tamanho = 1000;
+			numeroTentativas = 5;
+		}
+	
+	int numeroAleatorio;
+	srand(time(NULL));
+	numeroAleatorio = rand() % tamanho;
+	int numero, minimo = 0, maximo = tamanho, jogadas = 0, cont=0;
+	 
+	do{
+		printf("Digite o numero:");
+		scanf("%d", &numero);
+			jogadas++;
+		if(numero > numeroAleatorio){
+			maximo = numero;
+			printf("O numero eh menor que %d\n", maximo);
+			} else if (numero < numeroAleatorio){
+			minimo = numero;
+			printf("O numero eh maior que %d\n", minimo);
+		} else{ 
+			printf("Parabens! voce acertou com %d jogadas\n", jogadas);         
+    }
+    cont++;	
+	    }while (cont < numeroTentativas);
+
+  
+	printf("Voce errou\n");
+  printf("O numero era %d:\n", numeroAleatorio);
+  
+    printf("Aperte 1 para jogar novamente!", opcao);
+    scanf("%d", &opcao);
+	
+	
+}
+
+  int main() {
+    int escolha;
+
+    do {
+        printf("===== MENU =====\n");
+        printf("1. Jogo da velha\n");
+        printf("2. Jogo da memoria\n");
+        printf("3. Jogo da adivinhacao\n");
+        printf("0. Sair\n");
+        printf("Digite sua escolha: ");
+        scanf("%d", &escolha);
+
+        switch (escolha) {
+            case 1:
+                game1();
+                break;
+            case 2:
+                game2();
+                break;
+            case 3:
+                game3();
+                break;
+            case 0:
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                printf("Opção inválida! Digite novamente.\n");
+                break;
+        }
+
+        printf("\n");
+    } while (escolha != 0);
+
+    return 0;
+}
